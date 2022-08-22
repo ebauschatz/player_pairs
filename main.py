@@ -1,4 +1,3 @@
-import enum
 import random
 import console_display
 
