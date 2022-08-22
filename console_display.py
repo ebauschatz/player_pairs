@@ -8,3 +8,14 @@ def display_all_hands(hands):
         print(f'\n{hand["name"]}')
         print(f'Hand: {hand["cards"]}')
         print(f'Number of Pairs: {hand["pairs"]}')
+
+def display_all_winners(winning_hands):
+    number_of_winners = len(winning_hands)
+    if number_of_winners == 0:
+        print('No players had one or more pairs in their hand.')
+    elif number_of_winners == 1:
+        print(f'\n{winning_hands[0]["name"]} has won with {winning_hands[0]["pairs"]} pair(s)!')
+    else:
+        print(f'\nThere was a {number_of_winners}-way tie between the below players with {winning_hands[0]["pairs"]} pair(s)!')
+        for hand in winning_hands:
+            print(hand['name'])

@@ -12,7 +12,8 @@ def main():
     deal_cards(all_hands, cards_per_hand, deck)
     determine_pairs_in_hands(all_hands)
     console_display.display_all_hands(all_hands)
-    #determine and display the winner(s)
+    winners = determine_hand_winners(all_hands)
+    console_display.display_all_winners(winners)
 
 def generate_deck(type_repetitions):
     card_types = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
@@ -51,5 +52,17 @@ def determine_pairs_in_hands(hands):
             if len([index for index, card_from_hand in enumerate(hand['cards']) if card_from_hand == card])  > 1:
                 hands[index]['pairs'] += 1
 
+def determine_hand_winners(hands):
+    winning_number_of_pairs = find_max_pairs(hands)
+    if winning_number_of_pairs == 0:
+        return []
+    return [hand for hand in hands if hand['pairs'] == winning_number_of_pairs]
+
+def find_max_pairs(hands):
+    max_pairs = 0
+    for hand in hands:
+        if hand['pairs'] > max_pairs:
+            max_pairs = hand ['pairs']
+    return max_pairs
 
 main()
