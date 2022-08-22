@@ -1,12 +1,14 @@
 import random
 import console_display
+import game_settings
 
 def main():
-    cards_per_hand = 5
-    number_of_each_type_in_deck = 4
-    number_of_players = 4
+    cards_per_hand = game_settings.get_cards_per_hand()
+    card_types = game_settings.get_card_types()
+    number_of_each_type_in_deck = game_settings.get_number_of_each_type_in_deck()
+    number_of_players = game_settings.get_number_of_players()
     console_display.display_welcome_message(cards_per_hand)
-    deck = generate_deck(number_of_each_type_in_deck)
+    deck = generate_deck(number_of_each_type_in_deck, card_types)
     shuffle_deck(deck)
     all_hands = generate_player_hands(number_of_players)
     deal_cards(all_hands, cards_per_hand, deck)
@@ -15,10 +17,9 @@ def main():
     winners = determine_hand_winners(all_hands)
     console_display.display_all_winners(winners)
 
-def generate_deck(type_repetitions):
-    card_types = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king']
+def generate_deck(type_repetitions, types):
     new_deck = []
-    new_deck.extend(card_types * type_repetitions)
+    new_deck.extend(types * type_repetitions)
     return new_deck
 
 def shuffle_deck(deck):
