@@ -12,7 +12,7 @@ def main():
     all_hands = generate_player_hands(number_of_players)
     deal_cards(all_hands, cards_per_hand, deck)
     determine_pairs_in_hands(all_hands)
-    #display hands and pairs per hand
+    console_display.display_all_hands(all_hands)
     #determine and display the winner(s)
 
 def generate_deck(type_repetitions):
