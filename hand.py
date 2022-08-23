@@ -22,7 +22,9 @@ def play_hand(hands, cards_per_hand, deck):
 # TODO: Create a function that shuffles without using random.shuffle
 # Only using randint function
 def shuffle_deck(deck):
-    random.shuffle(deck)
+    for card_indexes_remaining_to_shuffle in range(len(deck) - 1, -1, -1):
+        index_of_card = random.randint(0, card_indexes_remaining_to_shuffle)
+        deck.append(deck.pop(index_of_card))
 
 def deal_cards(hands, cards_per_hand, card_deck):
     for _ in range(cards_per_hand):
