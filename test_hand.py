@@ -91,3 +91,42 @@ def test_determine_hand_winners_no_winners():
     ]
 
     assert hand.determine_hand_winners(test_hands) == []
+
+def test_determine_pairs_in_hands_no_pairs():
+    test_hands = [
+        {'name': 'test hand 1', 'cards': ['ace', 'two', 'three', 'four', 'five'], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': ['ace', 'two', 'three', 'four', 'five'], 'pairs': 0, 'wins': 0}
+    ]
+    test_hands_expected = [
+        {'name': 'test hand 1', 'cards': ['ace', 'two', 'three', 'four', 'five'], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': ['ace', 'two', 'three', 'four', 'five'], 'pairs': 0, 'wins': 0}
+    ]
+
+    hand.determine_pairs_in_hands(test_hands)
+    assert test_hands == test_hands_expected
+
+def test_determine_pairs_in_hands_at_least_one_pair():
+    test_hands = [
+        {'name': 'test hand 1', 'cards': ['ace', 'two', 'ace', 'four', 'five'], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': ['ace', 'two', 'three', 'three', 'two'], 'pairs': 0, 'wins': 0}
+    ]
+    test_hands_expected = [
+        {'name': 'test hand 1', 'cards': ['ace', 'two', 'ace', 'four', 'five'], 'pairs': 1, 'wins': 0},
+        {'name': 'test hand 2', 'cards': ['ace', 'two', 'three', 'three', 'two'], 'pairs': 2, 'wins': 0}
+    ]
+
+    hand.determine_pairs_in_hands(test_hands)
+    assert test_hands == test_hands_expected
+
+def test_determine_pairs_in_hands_repeated_pair_cards():
+    test_hands = [
+        {'name': 'test hand 1', 'cards': ['ace', 'ace', 'ace', 'four', 'five'], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': ['two', 'two', 'two', 'three', 'three'], 'pairs': 0, 'wins': 0}
+    ]
+    test_hands_expected = [
+        {'name': 'test hand 1', 'cards': ['ace', 'ace', 'ace', 'four', 'five'], 'pairs': 1, 'wins': 0},
+        {'name': 'test hand 2', 'cards': ['two', 'two', 'two', 'three', 'three'], 'pairs': 2, 'wins': 0}
+    ]
+
+    hand.determine_pairs_in_hands(test_hands)
+    assert test_hands == test_hands_expected
