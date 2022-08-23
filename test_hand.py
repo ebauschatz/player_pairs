@@ -130,3 +130,45 @@ def test_determine_pairs_in_hands_repeated_pair_cards():
 
     hand.determine_pairs_in_hands(test_hands)
     assert test_hands == test_hands_expected
+
+def test_deal_cards_multiple_cards_per_hand():
+    test_deck = ['ace', 'two', 'three', 'four', 'five', 'six']
+    cards_per_hand = 3
+    test_hands = [
+        {'name': 'test hand 1', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': [], 'pairs': 0, 'wins': 0}
+    ]
+    test_hands_expected = [
+        {'name': 'test hand 1', 'cards': ['six', 'four', 'two'], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': ['five', 'three', 'ace'], 'pairs': 0, 'wins': 0}
+    ]
+
+    hand.deal_cards(test_hands, cards_per_hand, test_deck)
+    assert test_hands == test_hands_expected
+
+def test_deal_cards_remove_dealt_cards_from_deck():
+    test_deck = ['ace', 'two', 'three', 'four', 'five', 'six']
+    test_deck_expected = []
+    cards_per_hand = 3
+    test_hands = [
+        {'name': 'test hand 1', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': [], 'pairs': 0, 'wins': 0}
+    ]
+
+    hand.deal_cards(test_hands, cards_per_hand, test_deck)
+    assert test_deck == test_deck_expected
+
+def test_deal_cards_no_cards_per_hand():
+    test_deck = ['ace', 'two', 'three', 'four', 'five', 'six']
+    cards_per_hand = 0
+    test_hands = [
+        {'name': 'test hand 1', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': [], 'pairs': 0, 'wins': 0}
+    ]
+    test_hands_expected = [
+        {'name': 'test hand 1', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': [], 'pairs': 0, 'wins': 0}
+    ]
+
+    hand.deal_cards(test_hands, cards_per_hand, test_deck)
+    assert test_hands == test_hands_expected
