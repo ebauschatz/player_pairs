@@ -7,7 +7,8 @@ def play_hand(hands, cards_per_hand, deck):
     determine_pairs_in_hands(hands)
     console_display.display_all_hands(hands)
     winners = determine_hand_winners(hands)
-    console_display.display_all_winners(winners)
+    track_wins(winners)
+    console_display.display_hand_winners(winners)
 
 def shuffle_deck(deck):
     random.shuffle(deck)
@@ -27,14 +28,18 @@ def determine_pairs_in_hands(hands):
                 hands[index]['pairs'] += 1
 
 def determine_hand_winners(hands):
-    winning_number_of_pairs = find_max_pairs(hands)
+    winning_number_of_pairs = find_max_value_from_key('pairs', hands)
     if winning_number_of_pairs == 0:
         return []
     return [hand for hand in hands if hand['pairs'] == winning_number_of_pairs]
 
-def find_max_pairs(hands):
-    max_pairs = 0
+def find_max_value_from_key(key, hands):
+    current_max = 0
     for hand in hands:
-        if hand['pairs'] > max_pairs:
-            max_pairs = hand ['pairs']
-    return max_pairs
+        if hand[key] > current_max:
+            current_max = hand[key]
+    return current_max
+
+def track_wins(winning_hands):
+    for hand in winning_hands:
+        hand['wins'] += 1
