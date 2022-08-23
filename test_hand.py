@@ -172,3 +172,29 @@ def test_deal_cards_no_cards_per_hand():
 
     hand.deal_cards(test_hands, cards_per_hand, test_deck)
     assert test_hands == test_hands_expected
+
+def test_shuffle_deck_empty_deck():
+    test_deck = []
+
+    hand.shuffle_deck(test_deck)
+    assert test_deck == []
+
+def test_shuffle_deck_single_card_deck():
+    test_deck = ['ace']
+    test_deck_expected = ['ace']
+
+    hand.shuffle_deck(test_deck)
+    assert test_deck == test_deck_expected
+
+def test_shuffle_deck_multiple_card_deck():
+    test_deck = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+    test_deck_original = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+
+    test_deck_reshuffled = False
+    shuffle_counter = 0
+    while shuffle_counter < 1000 and test_deck_reshuffled is False:
+        hand.shuffle_deck(test_deck)
+        shuffle_counter += 1
+        if test_deck != test_deck_original:
+            test_deck_reshuffled = True
+    assert test_deck_reshuffled
