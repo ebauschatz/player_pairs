@@ -32,11 +32,12 @@ def deal_cards(hands, cards_per_hand, card_deck):
 def determine_pairs_in_hands(hands):
     for index, hand in enumerate(hands):
         # TODO: Look up Lambda functions, the "filter" function, and use to find unique cards
-        unique_cards = list(set(hand['cards']))
-        if len(unique_cards) == len(hand['cards']):
+        all_cards = hand['cards']
+        unique_cards_and_positions = list(filter(lambda card: card[1] not in all_cards[card[0] + 1:], enumerate(all_cards)))
+        if len(unique_cards_and_positions) == len(all_cards):
             continue
-        for card in unique_cards:
-            if len([index for index, card_from_hand in enumerate(hand['cards']) if card_from_hand == card])  > 1:
+        for _, card in unique_cards_and_positions:
+            if all_cards.count(card) > 1:
                 hands[index]['pairs'] += 1
 
 def determine_hand_winners(hands):
