@@ -19,8 +19,6 @@ def play_hand(hands, cards_per_hand, deck):
     track_wins(winners)
     console_display.display_hand_winners(winners)
 
-# TODO: Create a function that shuffles without using random.shuffle
-# Only using randint function
 def shuffle_deck(deck):
     for card_indexes_remaining_to_shuffle in range(len(deck) - 1, -1, -1):
         index_of_card = random.randint(0, card_indexes_remaining_to_shuffle)
