@@ -59,3 +59,35 @@ def test_find_max_value_from_key_all_options_same_value():
     ]
 
     assert hand.find_max_value_from_key('key2', test_dicts) == 4
+
+def test_determine_hand_winners_one_winner():
+    test_hands = [
+        {'name': 'test hand 1', 'cards': [], 'pairs': 1, 'wins': 0},
+        {'name': 'test hand 2', 'cards': [], 'pairs': 1, 'wins': 0},
+        {'name': 'test hand 3', 'cards': [], 'pairs': 2, 'wins': 0}
+    ]
+    test_winning_hand = [{'name': 'test hand 3', 'cards': [], 'pairs': 2, 'wins': 0}]
+
+    assert hand.determine_hand_winners(test_hands) == test_winning_hand
+
+def test_determine_hand_winners_multiple_winners():
+    test_hands = [
+        {'name': 'test hand 1', 'cards': [], 'pairs': 1, 'wins': 0},
+        {'name': 'test hand 2', 'cards': [], 'pairs': 2, 'wins': 0},
+        {'name': 'test hand 3', 'cards': [], 'pairs': 2, 'wins': 0}
+    ]
+    test_winning_hands = [
+        {'name': 'test hand 2', 'cards': [], 'pairs': 2, 'wins': 0},
+        {'name': 'test hand 3', 'cards': [], 'pairs': 2, 'wins': 0}
+    ]
+
+    assert hand.determine_hand_winners(test_hands) == test_winning_hands
+
+def test_determine_hand_winners_no_winners():
+    test_hands = [
+        {'name': 'test hand 1', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 2', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'test hand 3', 'cards': [], 'pairs': 0, 'wins': 0}
+    ]
+
+    assert hand.determine_hand_winners(test_hands) == []
