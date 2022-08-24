@@ -82,3 +82,25 @@ def test_get_hand_name_single_digit():
     test_player_number = 3
     
     assert game.get_hand_name(test_player_number) == 'Player 4'
+
+def test_generate_player_hands_no_hands():
+    test_hand_number = 0
+    hands_expected = []
+
+    assert game.generate_player_hands(test_hand_number) == hands_expected
+
+def test_generate_player_hands_one_hand():
+    test_hand_number = 1
+    hands_expected = [{'name': 'Player 1', 'cards': [], 'pairs': 0, 'wins': 0}]
+
+    assert game.generate_player_hands(test_hand_number) == hands_expected
+
+def test_generate_player_hands_multiple_hands():
+    test_hand_number = 3
+    hands_expected = [
+        {'name': 'Player 1', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'Player 2', 'cards': [], 'pairs': 0, 'wins': 0},
+        {'name': 'Player 3', 'cards': [], 'pairs': 0, 'wins': 0}
+    ]
+
+    assert game.generate_player_hands(test_hand_number) == hands_expected
