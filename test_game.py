@@ -67,3 +67,18 @@ def test_reset_all_hands_cards_added_back_to_deck():
 
     game.reset_all_hands(test_hands, test_deck)
     assert test_deck == test_deck_expected
+
+def test_get_hand_name_first_hand():
+    test_player_number = 0
+
+    assert game.get_hand_name(test_player_number) == 'Player 1'
+
+def test_get_hand_name_multi_digit():
+    test_player_number = 100
+    
+    assert game.get_hand_name(test_player_number) == 'Player 101'
+
+def test_get_hand_name_single_digit():
+    test_player_number = 3
+    
+    assert game.get_hand_name(test_player_number) == 'Player 4'
