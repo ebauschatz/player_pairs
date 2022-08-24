@@ -104,3 +104,22 @@ def test_generate_player_hands_multiple_hands():
     ]
 
     assert game.generate_player_hands(test_hand_number) == hands_expected
+
+def test_generate_deck_regular_deck():
+    test_card_types = ['ace', 'two', 'queen', 'king']
+    test_type_repetitions = 3
+    test_deck_expected = ['ace', 'two', 'queen', 'king', 'ace', 'two', 'queen', 'king', 'ace', 'two', 'queen', 'king']
+
+    assert game.generate_deck(test_type_repetitions, test_card_types) == test_deck_expected
+
+def test_generate_deck_no_types():
+    test_card_types = []
+    test_type_repetitions = 3
+
+    assert game.generate_deck(test_type_repetitions, test_card_types) == []
+
+def test_generate_deck_no_repetitions():
+    test_card_types = ['ace', 'two', 'queen', 'king']
+    test_type_repetitions = 0
+
+    assert game.generate_deck(test_type_repetitions, test_card_types) == []
